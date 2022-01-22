@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todo Tasks</title>
+  <style>
+    body{
+      width: 100vw;
+      height: 100vh;
+    }
+    form{
+      margin-left: 50vw
+    }
+  </style>
+</head>
+
+<body>
+  <form action="">
+    <input type="text" autocomplete="off" id="text">
+    <input type="submit" id="submit">
+  </form>
+  
+  <ul></ul>
+  
+  <!--<script>
+    document.addEventListener("DOMContentLoaded", () => {
+      let para = document.querySelector("p");
+      document.querySelector("#submit").addEventListener('submit', () => {
+        para.innerText = document.querySelector("#text").value;
+      });
+    });
+  </script>-->
+
+  <script>
+    setInterval(() => {
+      let para = document.querySelector("ul");
+      let text_value = document.querySelector("#text");
+      if (text_value.value !== ""){
+        let list = document.createElement("li");
+        list.innerText = text_value.value;
+        para.appendChild(list)
+        text_value.value = "";
+      }
+    }, 2000)
+  </script>
+  
+</body>
+</html>
