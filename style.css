@@ -1,0 +1,118 @@
+:root{
+    --container-height: 90vh;
+    --container-margin-top: 
+}
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html{
+    font-size: 62.5%;
+    scroll-behavior: smooth;
+}
+
+
+
+body{
+    width: 100%;
+    height: 100%;
+    background: #111111;
+}
+
+#container{
+    width: 65vw;
+    height: var(--container-height);
+    margin: auto;
+    margin-top: calc((100vh - var(--container-height)) / 2);
+    padding: 1.5rem;
+    font-size: 2rem;
+    background: #112222;
+    word-wrap: break-word;
+    overflow:auto;
+    opacity: 1;
+}
+
+.list-item{
+    height: auto;
+    padding: 1.5rem;
+    background: #111111;
+    text-justify: center;
+    border-radius: 2rem;
+    opacity: 0.8;
+}
+
+#entry{
+    position: sticky;
+    bottom: 0;
+    display: flex;
+    flex-direction: row;
+    
+
+}
+
+.list-item,
+#entry{
+    width: 95%;
+    margin: .5rem;
+}
+
+label{
+    color: #eedddd;
+    text-transform: capitalize;
+}
+
+
+#text{
+    position: -webkit-sticky;
+    position: sticky;
+    bottom: 0;
+    width: 100%;
+    height: 5rem;
+    font-size: 5vh;
+    padding: 2rem;
+    background: #111111;
+    color: #eedddd;
+    border: none;
+    border-radius: 2rem;
+    opacity: 0.6;
+}
+
+#submit{
+    width: 18%;
+    height: auto;
+    left: 0;
+    border: none;
+    font-size: 3rem;
+    color: #eedddd;
+    margin-right: .5rem;
+    background: #111111;
+    border-radius: 50%;
+}
+
+@media screen and (max-width: 450px)
+{
+    #container{
+        width: 100vw;
+        height: 100vh;
+        margin: 0;
+        overflow: auto;
+    }
+
+    #entry{
+        position: sticky;
+        bottom: 0;
+    }
+
+    #text{
+        width: 100%;
+    }
+}
+
+/*@media screen and (max-height: 450px){
+    #text{
+    
+    }
+}*/
