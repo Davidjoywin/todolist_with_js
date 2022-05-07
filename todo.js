@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <label>${element.value}</label><br>
         `
     }
-cvc
+
     function isEmpty(input_value){
         return input_value === "";
     }
@@ -29,14 +29,11 @@ cvc
             `;
             todo_input.value = "";
         }
-    }) 
-    /*
+    })
 
-    submit.onclick = () => todo_input.style.color = 'red';
-
-    document.onkeydown = function(event) {
-        if (event.key === "enter"){
+    document.addEventListener("keydown", function(event) {
+        if (event.key == "Enter"){
             submit.click();
         }
-*/
+    })
 })
