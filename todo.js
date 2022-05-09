@@ -1,17 +1,29 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    function addElement(element){
-        return 
-        `
-        <input type="checkbox" name="" id="">
-        <label>${element.value}</label><br>
-        `
-    }
-
     function isEmpty(input_value){
+        // checks if the entry point/text input area is empty
         return input_value === "";
     }
-    
+
+    function addElement(element){
+        // this is used to add new item to the todo list
+        return `
+        <div class="list-item">
+        <input type="checkbox" name="" id="">
+        <label>${element.value}</label><br>
+        </div>
+        `;
+    }
+
+    localStorage.setItem("todo", "[]");
+
+    function addTodoToStorage(item){
+        let myTodo = JSON.parse(localStorage.getItem("todo"));
+    }
+
+    function getAllTodo(){
+
+    }
     
     let todo_input = document.getElementById("text");
     let submit = document.getElementById("submit");
@@ -20,13 +32,8 @@ document.addEventListener('DOMContentLoaded', () => {
     
     submit.addEventListener("click", () => {
         if (!isEmpty(todo_input.value)){
-            todo_list.innerHTML += 
-            `
-            <div class="list-item">
-            <input type="checkbox" name="" id="">
-            <label>${todo_input.value}</label><br>
-            </div>
-            `;
+            let item = addElement(todo_input)
+            todo_list.innerHTML += item;
             todo_input.value = "";
         }
     })
