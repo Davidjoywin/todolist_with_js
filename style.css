@@ -36,6 +36,8 @@ body{
 }
 
 .list-item{
+    position: sticky;
+    bottom: 5.5rem;
     height: auto;
     padding: 1.5rem;
     background: #111111;

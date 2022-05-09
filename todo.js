@@ -7,18 +7,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function addElement(element){
         // this is used to add new item to the todo list
-        return `
+        return (`
         <div class="list-item">
         <input type="checkbox" name="" id="">
         <label>${element.value}</label><br>
         </div>
-        `;
+        `);
     }
 
     localStorage.setItem("todo", "[]");
 
     function addTodoToStorage(item){
-        let myTodo = JSON.parse(localStorage.getItem("todo"));
     }
 
     function getAllTodo(){
@@ -43,6 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
             submit.click();
         }
     })
+
 })
 
 // next is local storage
