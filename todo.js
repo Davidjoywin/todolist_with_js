@@ -37,3 +37,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     })
 })
+
+// next is local storage
+
+/*
+local storage to save todos and the corresponding text data
+to have access to it even after closing the browser window
+LOCAL STORAGE
+*/
