@@ -6,33 +6,59 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function addElement(element){
-        // this is used to add new item to the todo list
+        /* 
+        this is used to add new item to 
+        the todo list using todo dom to creaate 
+        new item on the todo list html document
+        */
         return (`
         <div class="list-item">
         <input type="checkbox" name="" id="">
-        <label>${element.value}</label><br>
+        <label>${element.value}</label>
+        <button><span>Remove</span></button><br>
+        
         </div>
         `);
     }
 
-    localStorage.setItem("todo", "[]");
+    if (!localStorage.getItem("todo")){
+        // if todo item is not set, then go ahead and set it.
+        localStorage.setItem("todo", "[]"); 
+    }
 
     function addTodoToStorage(item){
+        // adding todo to the local storage
+        let todos = JSON.parse(localStorage.getItem("todo"));
+        todos.push(item);
+        localStorage.setItem("todo", JSON.stringify(todos));
     }
 
     function getAllTodo(){
-
+        // getting todo from local storage
+        return JSON.parse(localStorage.getItem("todo"));
     }
     
     let todo_input = document.getElementById("text");
     let submit = document.getElementById("submit");
     let todo_list = document.getElementById("list-container");
+    // let todo_item = document.querySelectorAll(".list-item");
+    const HIDE = document.getElementById("hide");
+    const CLEAR = document.getElementById("clear");
 
+    CLEAR.addEventListener('click', () => {
+        let todos = getAllTodo();
+        todos = [];
+        localStorage.setItem("todo", JSON.stringify(todos));
+    })
+
+    const todo_storage = getAllTodo(); // todo items from the local storage
+    todo_storage.forEach(item => todo_list.innerHTML += item);
     
     submit.addEventListener("click", () => {
         if (!isEmpty(todo_input.value)){
-            let item = addElement(todo_input)
-            todo_list.innerHTML += item;
+            let item = addElement(todo_input);
+            addTodoToStorage(item);
+            todo_list.innerHTML += item
             todo_input.value = "";
         }
     })
@@ -42,13 +68,4 @@ document.addEventListener('DOMContentLoaded', () => {
             submit.click();
         }
     })
-
 })
-
-// next is local storage
-
-/*
-local storage to save todos and the corresponding text data
-to have access to it even after closing the browser window
-LOCAL STORAGE
-*/
