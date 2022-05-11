@@ -51,8 +51,8 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem("todo", JSON.stringify(todos));
     })
 
-    const todo_storage = getAllTodo(); // todo items from the local storage
-    todo_storage.forEach(item => todo_list.innerHTML += item);
+    const TODO_STORAGE = getAllTodo(); // todo items from the local storage
+    TODO_STORAGE.forEach(item => todo_list.innerHTML += item);
     
     submit.addEventListener("click", () => {
         if (!isEmpty(todo_input.value)){
