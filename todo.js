@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return (`
         <div class="list-item">
         <input type="checkbox" name="" id="">
-        <label>${element.value}</label>
+        <label>${element}</label>
         <button><span>Remove</span></button><br>
         
         </div>
@@ -52,12 +52,12 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 
     const TODO_STORAGE = getAllTodo(); // todo items from the local storage
-    TODO_STORAGE.forEach(item => todo_list.innerHTML += item);
+    TODO_STORAGE.forEach(item => todo_list.innerHTML += addElement(item));
     
     submit.addEventListener("click", () => {
         if (!isEmpty(todo_input.value)){
-            let item = addElement(todo_input);
-            addTodoToStorage(item);
+            let item = addElement(todo_input.value);
+            addTodoToStorage(todo_input.value);
             todo_list.innerHTML += item
             todo_input.value = "";
         }
