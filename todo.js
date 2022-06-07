@@ -1,4 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
+    
+    let todo_input = document.getElementById("text");
+    let submit = document.getElementById("submit");
+    let todo_list = document.getElementById("list-container");
+    let todo_item = document.querySelectorAll(".list-item");
+    const HIDE = document.getElementById("hide");
+    const CLEAR = document.getElementById("clear");
+    
 
     function isEmpty(input_value){
         // checks if the entry point/text input area is empty
@@ -15,8 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="list-item">
         <input type="checkbox" name="" id="">
         <label>${element}</label>
-        <button><span>Remove</span></button><br>
-        
+        <button class="remove"><span>Remove</span></button><br>
         </div>
         `);
     }
@@ -37,30 +44,63 @@ document.addEventListener('DOMContentLoaded', () => {
         // getting todo from local storage
         return JSON.parse(localStorage.getItem("todo"));
     }
-    
-    let todo_input = document.getElementById("text");
-    let submit = document.getElementById("submit");
-    let todo_list = document.getElementById("list-container");
-    // let todo_item = document.querySelectorAll(".list-item");
-    const HIDE = document.getElementById("hide");
-    const CLEAR = document.getElementById("clear");
 
-    CLEAR.addEventListener('click', () => {
-        let todos = getAllTodo();
-        todos = [];
-        localStorage.setItem("todo", JSON.stringify(todos));
-    })
 
     const TODO_STORAGE = getAllTodo(); // todo items from the local storage
     TODO_STORAGE.forEach(item => todo_list.innerHTML += addElement(item));
+
+    function getPosToRemove(arr){
+        for (let rem=0; rem < arr.length; rem++){
+            let parentNode = arr[rem].parentNode;
+            if (parentNode.childNodes[1].checked){
+                return rem;
+            }
+        }
+    }
+
+    function removeFromStorage(pos){
+        let todos = JSON.parse(localStorage.getItem("todo"));
+        todos.splice(pos, 1);
+        localStorage.setItem("todo", JSON.stringify(todos));
+        location.reload()
+    }
+
     
+    // remove = document.querySelectorAll(".remove");
+    // remove_pos = getPosToRemove(remove);
+    
+
+
     submit.addEventListener("click", () => {
         if (!isEmpty(todo_input.value)){
             let item = addElement(todo_input.value);
             addTodoToStorage(todo_input.value);
+            location.reload();
             todo_list.innerHTML += item
             todo_input.value = "";
         }
+    })
+
+    //-------------------------------
+    todo_item.forEach(todo => {
+        if (todo.childNodes[1].checked == true){
+            todo.style.display = 'none';
+        }
+        else{
+            todo.style.display = 'block';
+        }
+    })
+    
+    HIDE.addEventListener('click', () => {
+        todo_item.forEach(todo => {
+            todo.style.display = 'none'
+        })
+    })
+//-----------------------------------------
+
+    CLEAR.addEventListener('click', () => {
+        localStorage.clear();
+        location.reload();
     })
 
     document.addEventListener("keydown", function(event) {
@@ -68,4 +108,18 @@ document.addEventListener('DOMContentLoaded', () => {
             submit.click();
         }
     })
+
+    const REMOVE = document.querySelectorAll(".remove");
+
+    REMOVE.forEach((rem, key) => rem.addEventListener("click", () => {
+        removeFromStorage(key);
+    }))
+
+    HIDE.addEventListener("click", () => {
+        const HIDE_TEXT = "Hide Done";
+        const SHOW_TEXT = "Show Done";
+        
+        HIDE.innerText === HIDE_TEXT ? HIDE.innerText = SHOW_TEXT : HIDE.innerText = HIDE_TEXT;
+    })
+
 })

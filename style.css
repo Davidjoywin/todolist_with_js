@@ -62,6 +62,7 @@ body{
 }
 
 button{
+    color: #eedddd;
     background: #111111;
     border: none;
     padding: .6rem;
