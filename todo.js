@@ -49,14 +49,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const TODO_STORAGE = getAllTodo(); // todo items from the local storage
     TODO_STORAGE.forEach(item => todo_list.innerHTML += addElement(item));
 
-    function getPosToRemove(arr){
-        for (let rem=0; rem < arr.length; rem++){
-            let parentNode = arr[rem].parentNode;
-            if (parentNode.childNodes[1].checked){
-                return rem;
-            }
+    let check = document.querySelectorAll("input[type=checkbox]");
+    check.forEach(ele_checked => {
+        if (ele_checked.checked){
+            ele_checked.parentNode.style.display = "none";
         }
-    }
+        ele_checked.parentNode.style.display = "block";
+    })
 
     function removeFromStorage(pos){
         let todos = JSON.parse(localStorage.getItem("todo"));
@@ -65,11 +64,13 @@ document.addEventListener('DOMContentLoaded', () => {
         location.reload()
     }
 
-    
-    // remove = document.querySelectorAll(".remove");
-    // remove_pos = getPosToRemove(remove);
-    
-
+    const itemVisibility = (value) => {
+        check.forEach(ele => {
+            if (ele.checked) {
+                ele.parentNode.style.display = value;
+            }
+        })
+    }
 
     submit.addEventListener("click", () => {
         if (!isEmpty(todo_input.value)){
@@ -119,7 +120,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const HIDE_TEXT = "Hide Done";
         const SHOW_TEXT = "Show Done";
         
-        HIDE.innerText === HIDE_TEXT ? HIDE.innerText = SHOW_TEXT : HIDE.innerText = HIDE_TEXT;
+        if (HIDE.innerText === HIDE_TEXT) {
+            HIDE.innerText = SHOW_TEXT;
+            //function to hide items
+            itemVisibility("none");
+        }
+        else{
+            HIDE.innerText = HIDE_TEXT;
+            itemVisibility("block");
+        }
     })
-
 })
